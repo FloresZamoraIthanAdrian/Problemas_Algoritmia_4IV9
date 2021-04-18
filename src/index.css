@@ -5,9 +5,35 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(44, 44, 44);
+  color:#ffff00;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.nav{
+  margin-left: 16px;
+  color:#ffff00;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav:hover{
+  background-color: #444547;
+}
+
+.input{
+  border: none;
+  background-color:#444547;
+  border: none;
+  border-bottom: 2px solid #b8b827;
+  height: 35px;
+  margin: 32px;
+  color: white;
+  font-size: 28px;
+  padding: 16px;
+  font-family: monospace;
 }
