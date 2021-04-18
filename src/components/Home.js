@@ -5,7 +5,8 @@ class Home extends Component{
     render(){
         return <div style = {home}>
             Flores Zamora Ithan Adrian 4IV9
-            PSW
+            PSW <br/>
+            Problema 2 en mantenimiento, gracias por su compresion :D.
         </div>
     }
 

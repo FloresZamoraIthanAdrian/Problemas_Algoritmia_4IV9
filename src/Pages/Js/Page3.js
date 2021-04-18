@@ -4,16 +4,6 @@ import Btn from '../../components/Btn';
 import TextArea from '../../components/TextArea';
 import Input from '../../components/Input';
 
-let palabra = '';
-let contador = 0;
-
-let diccionary = [];
-let abecedario = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-let letrasConcuerrentes = [];
-let numeros = [];
-let letrasUnicas = [];
-
 class Page3 extends Component {
 
     constructor(props) {
@@ -21,73 +11,62 @@ class Page3 extends Component {
         this.maxim = this.maxim.bind(this);
         this.confirm = this.confirm.bind(this);
         this.state = {
-            count: 0
+            contentS: ''
         }
     }
 
     confirm = (event) => {
 
         if (event.which === 32) { alert('No se acpetan espacios') };
-        /* console.log(event.which) */
-        if (event.which !== 13) {
-            palabra += event.key
-        }
-        if (event.which == 44) {
-            diccionary.push(palabra);
-            palabra = '';
-        }
 
     }
 
     maxim() {
+        
+        let abc = [];
+        var avance = true;
+
         var result = document.getElementById('volumen').value;
 
         if (result.includes(' ')) {
+
             alert('Borre los espacios')
-        } else {
+            avance = false;
 
-            diccionary.forEach((word) => {
+        }else{avance = true}
 
-                abecedario.forEach((letra) => {
+        if(result.charAt(result.length - 1) == ',' && avance == true){
 
-
-                    if (word.includes(letra)) {
-
-                        letrasConcuerrentes.push(letra);
-
+            var diccionary = result.split(',');
+            console.log(diccionary)
+            
+            let palabra = '';
+            let letra = '';
+            
+            diccionary.forEach((element) => {
+              
+                palabra = '';
+              
+                for(var i = 0; i <= element.length - 1; i++){
+                    letra = element.charAt(i)
+                    if(palabra.includes(letra) == false){
+                        palabra += letra
                     }
-
-                    letrasConcuerrentes.forEach((elemento) => {
-                        if (!letrasUnicas.includes(elemento)) {
-                            letrasUnicas.push(elemento);
-                        }
-                    })
-                    
-                });
-
-                /* console.log(letrasUnicas)
-
-                contador = letrasUnicas.length;
-
-                numeros.push(contador)
-
-                console.log(contador)
-                var condition = 0
-                while (condition <= contador-1) {
-                    condition +=1
-                    console.log('si')
-                    letrasUnicas.shift();
+                    if(i == 50){break}
                 }
-                console.log(letrasUnicas)
-                contador = 0
-
-                console.log(numeros) */
-
+              
+                abc.push(palabra.length)
             });
+            
+            var mayor = Math.max(...abc);
+            var posiscionPalabra = abc.indexOf(mayor);
 
+            this.setState({
+                contentS: `La palabra con mas caracteres unicos es: ${diccionary[posiscionPalabra]}`
+            }) 
 
+        }else{alert('Tiene que terminar en coma')}
 
-        }
     }
 
     render() {
@@ -111,7 +90,7 @@ class Page3 extends Component {
 
             <div style={container}>
                 <Btn realice={this.maxim.bind(this)} text='Encontrar caracteres' />
-                <TextArea />
+                <TextArea cont = {this.state.contentS} />
             </div>
 
 
